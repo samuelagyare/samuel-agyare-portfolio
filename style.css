@@ -149,7 +149,6 @@ body {
     position: relative;
     background: var(--bg-dark);
     overflow: hidden;
-    padding-bottom: 5rem; /* Add padding to avoid overlap */
 }
 
 .hero::before {
@@ -540,6 +539,11 @@ body {
 
 /* --- Responsive Design --- */
 @media (max-width: 900px) {
+    .hero {
+        flex-direction: column; /* Stack hero content and tech stack */
+        padding-top: 5rem; /* Add space for nav bar */
+        padding-bottom: 2rem;
+    }
     .hero-content {
         grid-template-columns: 1fr;
         text-align: center;
@@ -555,6 +559,13 @@ body {
     }
     .hero-cta {
         justify-content: center; /* Center buttons on mobile */
+    }
+    .tech-stack {
+        position: relative; /* Change from absolute to relative */
+        bottom: auto;
+        left: auto;
+        transform: none;
+        margin-top: 3rem; /* Add space above */
     }
     .about-grid {
         grid-template-columns: 1fr;
@@ -574,16 +585,10 @@ body {
 }
 
 @media (max-width: 480px) {
-    .hero {
-        padding-bottom: 8rem; /* More space for tech stack */
-    }
     .hero-title { font-size: 2.8rem; }
     .section-title { font-size: 2.2rem; }
     .nav-container { padding: 1rem; }
     .hero-cta {
         flex-direction: column; /* Stack buttons vertically */
-    }
-    .tech-stack {
-        bottom: 1rem; /* Move it closer to the bottom */
     }
 }
