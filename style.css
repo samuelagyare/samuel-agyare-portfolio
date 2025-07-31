@@ -224,15 +224,11 @@ body {
 }
 
 .tech-stack {
-    position: absolute;
-    bottom: 3rem;
-    left: 50%;
-    transform: translateX(-50%);
     display: flex;
     gap: 1rem;
-    z-index: 2;
-    flex-wrap: wrap; /* Allow wrapping on small screens */
-    justify-content: center;
+    flex-wrap: wrap;
+    justify-content: flex-start; /* Default for desktop */
+    margin-top: 2.5rem; /* Add spacing */
 }
 
 .tech-item {
@@ -539,11 +535,6 @@ body {
 
 /* --- Responsive Design --- */
 @media (max-width: 900px) {
-    .hero {
-        flex-direction: column; /* Stack hero content and tech stack */
-        padding-top: 5rem; /* Add space for nav bar */
-        padding-bottom: 2rem;
-    }
     .hero-content {
         grid-template-columns: 1fr;
         text-align: center;
@@ -561,11 +552,7 @@ body {
         justify-content: center; /* Center buttons on mobile */
     }
     .tech-stack {
-        position: relative; /* Change from absolute to relative */
-        bottom: auto;
-        left: auto;
-        transform: none;
-        margin-top: 3rem; /* Add space above */
+        justify-content: center; /* Center on mobile */
     }
     .about-grid {
         grid-template-columns: 1fr;
