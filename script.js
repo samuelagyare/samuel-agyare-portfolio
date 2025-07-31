@@ -1,4 +1,24 @@
-// Smooth scrolling for navigation links
+// --- MOBILE NAVIGATION ---
+const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+const mobileNavMenu = document.querySelector('.mobile-nav-menu');
+const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+mobileMenuBtn.addEventListener('click', () => {
+    mobileNavMenu.classList.toggle('active');
+    // Change button to 'X' when menu is open
+    mobileMenuBtn.textContent = mobileNavMenu.classList.contains('active') ? '✕' : '☰';
+});
+
+// Close menu when a link is clicked
+mobileNavLinks.forEach(link => {
+    link.addEventListener('click', () => {
+        mobileNavMenu.classList.remove('active');
+        mobileMenuBtn.textContent = '☰';
+    });
+});
+
+
+// --- SMOOTH SCROLLING ---
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
@@ -12,15 +32,15 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Active navigation link highlighting on scroll
+// --- ACTIVE NAV LINK HIGHLIGHTING ---
 const sections = document.querySelectorAll('section');
 const navLinks = document.querySelectorAll('.nav-link');
 
 window.addEventListener('scroll', () => {
-    let current = 'home'; // Default to home
+    let current = 'home';
     sections.forEach(section => {
         const sectionTop = section.offsetTop;
-        if (scrollY >= (sectionTop - 150)) { // Adjusted offset
+        if (scrollY >= (sectionTop - 150)) {
             current = section.getAttribute('id');
         }
     });
@@ -33,7 +53,7 @@ window.addEventListener('scroll', () => {
     });
 });
 
-// Scroll progress indicator
+// --- SCROLL PROGRESS INDICATOR ---
 const scrollIndicator = document.getElementById('scrollIndicator');
 
 window.addEventListener('scroll', () => {
@@ -43,7 +63,7 @@ window.addEventListener('scroll', () => {
     scrollIndicator.style.transform = `scaleX(${scrolled})`;
 });
 
-// Navbar background change on scroll
+// --- NAVBAR BACKGROUND ON SCROLL ---
 const navbar = document.getElementById('navbar');
 window.addEventListener('scroll', () => {
     if (window.scrollY > 50) {
@@ -53,13 +73,12 @@ window.addEventListener('scroll', () => {
     }
 });
 
-// --- NEW CONTACT FORM HANDLING ---
+// --- CONTACT FORM HANDLING ---
 const contactForm = document.querySelector('.contact-form');
 const formStatus = document.getElementById('form-status');
 
 contactForm.addEventListener('submit', async (e) => {
     e.preventDefault();
-    
     const form = e.target;
     const data = new FormData(form);
     
@@ -67,9 +86,7 @@ contactForm.addEventListener('submit', async (e) => {
         const response = await fetch(form.action, {
             method: form.method,
             body: data,
-            headers: {
-                'Accept': 'application/json'
-            }
+            headers: { 'Accept': 'application/json' }
         });
 
         if (response.ok) {
@@ -78,11 +95,7 @@ contactForm.addEventListener('submit', async (e) => {
             form.reset();
         } else {
             const responseData = await response.json();
-            if (Object.hasOwn(responseData, 'errors')) {
-                formStatus.textContent = responseData["errors"].map(error => error["message"]).join(", ");
-            } else {
-                formStatus.textContent = "Oops! There was a problem submitting your form.";
-            }
+            formStatus.textContent = responseData.errors ? responseData.errors.map(error => error.message).join(", ") : "Oops! There was a problem.";
             formStatus.style.color = 'red';
         }
     } catch (error) {
@@ -91,24 +104,17 @@ contactForm.addEventListener('submit', async (e) => {
     }
 });
 
-
-// Intersection Observer for fade-in animations on scroll
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-};
-
-const observer = new IntersectionObserver((entries, observer) => {
+// --- SCROLL ANIMATIONS ---
+const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
             entry.target.style.opacity = '1';
             entry.target.style.transform = 'translateY(0)';
-            observer.unobserve(entry.target); // Stop observing after it becomes visible
+            observer.unobserve(entry.target);
         }
     });
-}, observerOptions);
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
-// Apply the observer to elements you want to animate
 document.querySelectorAll('.skill-category, .project-card, .about-grid').forEach(el => {
     el.style.opacity = '0';
     el.style.transform = 'translateY(30px)';
