@@ -3,7 +3,7 @@ This repository contains the source code for my personal portfolio website, show
 
 The website is a fully responsive, single-page application built with modern web technologies.
 
-Live Site: https://samuel-agyare-portfolio.netlify.app/
+Live Site: https://samuelmarrionagyare.com/
 
 Tech Stack
 HTML5
@@ -33,4 +33,5 @@ cd samuel-agyare-portfolio
 Open index.html in your browser. For the best experience with live reloading, use an extension like Live Server in VS Code.
 
 Deployment
+
 This site is automatically deployed and hosted on Netlify, connected directly to the main branch of this GitHub repository. Any push to the main branch will trigger a new deployment.
